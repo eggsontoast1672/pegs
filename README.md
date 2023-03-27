@@ -28,3 +28,44 @@ Another way to get rid of the block pegs is to push them into a black square,
 which is like a pit. If you fall down a pit (e.g. move your character on top of
 one), you have to restart the level. If you push a block on top of a pit, both
 the block and the pit disappear.
+
+## Compiling and Playing
+
+First off, I haven't tested this game on Windows, MacOS, or any \*NIX operating
+system other than GNU/Linux. Maybe I'll add support for other OS's in the
+future, who knows. Probably not. But maybe!
+
+Compiling on linux is easy. Just make sure you have the following packages
+installed:
+
+- make
+- cmake
+- sfml
+
+### Ubuntu
+
+```bash
+apt install make cmake libsfml-dev
+```
+
+### Arch
+
+```bash
+pacman -S make cmake sfml
+```
+
+### Fedora
+
+```bash
+dnf install make cmake SFML-devel
+```
+
+Once you have those installed, create a build directory and install the cmake
+files into it.
+
+```bash
+mkdir build && cd build && cmake ..
+```
+
+Finally, run `make` to compile it. The binary will be located within the `pegs`
+directory, by the same name.
