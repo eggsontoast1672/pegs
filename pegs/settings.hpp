@@ -1,0 +1,8 @@
+#ifndef PEGS_SETTINGS_HPP
+#define PEGS_SETTINGS_HPP
+
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
+#define TILE_SIZE (SCREEN_WIDTH / 12.0)
+
+#endif
