@@ -8,16 +8,12 @@
 
 int main(void)
 {
-    auto window = sf::RenderWindow(
-        sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT),
-        "Pegs",
-        sf::Style::Close | sf::Style::Titlebar
-    );
-    
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Pegs", sf::Style::Close | sf::Style::Titlebar);
+
     // CPU usage goes through the roof without this
     window.setVerticalSyncEnabled(true);
-    
-    auto block_texture = sf::Texture();
+
+    sf::Texture block_texture;
     if (!block_texture.loadFromFile(
         "../assets/tiles.png",
         sf::IntRect(0, 0, 8, 8)
@@ -26,15 +22,23 @@ int main(void)
         return EXIT_FAILURE;
     }
 
-    auto sprite = sf::Sprite();
+    sf::Sprite sprite;
 
     sprite.setTexture(block_texture);
     sprite.setScale(TILE_SIZE / 8.0, TILE_SIZE / 8.0);
 
-    auto peg = Peg(sf::Vector2f(1, 0), sprite);
+    std::vector<Peg> pegs;
+    for (int i = 0; i < 12; ++i) // Top
+        pegs.emplace_back(sf::Vector2f(i, 0), sprite);
+    for (int i = 0; i < 12; ++i) // Bottom
+        pegs.emplace_back(sf::Vector2f(i, 7), sprite);
+    for (int i = 1; i < 7; ++i) // Left
+        pegs.emplace_back(sf::Vector2f(0, i), sprite);
+    for (int i = 1; i < 7; ++i) // Right
+        pegs.emplace_back(sf::Vector2f(11, i), sprite);
 
     while (window.isOpen()) {
-        auto event = sf::Event();
+        sf::Event event;
 
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -43,9 +47,12 @@ int main(void)
         }
 
         window.clear(sf::Color(0xb3be98ff));
-        window.draw(peg);
+
+        for (const Peg &peg : pegs)
+            window.draw(peg);
+
         window.display();
     }
 
-    return 0;
+    return EXIT_SUCCESS;
 }
