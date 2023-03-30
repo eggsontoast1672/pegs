@@ -3,16 +3,18 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "settings.hpp"
+
 class Player : public sf::Drawable {
-    private:
-        sf::Vector2f position;
-        sf::Sprite sprite;
+private:
+  sf::Vector2f position;
+  sf::Sprite sprite;
 
-    public:
-        Player();
+public:
+  Player(sf::Vector2f position, sf::Sprite sprite);
 
-        void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+  void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+  void update(void);
 };
-
 
 #endif

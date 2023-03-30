@@ -6,6 +6,7 @@ add_executable(
     pegs
     main.cpp
     peg.cpp
+    player.cpp
 )
 
 target_link_libraries(pegs ${SFML_LIBRARIES})
